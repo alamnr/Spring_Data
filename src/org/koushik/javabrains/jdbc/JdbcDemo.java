@@ -1,6 +1,7 @@
 package org.koushik.javabrains.jdbc;
 
 import org.koushik.javabrains.jdbc.dao.JdbcDaoImpl;
+import org.koushik.javabrains.jdbc.dao.SimpleJdbcDaoImpl;
 import org.koushik.javabrains.jdbc.model.Circle;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -25,6 +26,9 @@ public class JdbcDemo {
 		//dao.createTriangletable();
 		
 		//dao.insertNamedParamCircle(new Circle(4,"Fourth Circle"));
+		
+		SimpleJdbcDaoImpl simpleJdbcDaoImpl = ctx.getBean("simpleJdbcDaoImpl", SimpleJdbcDaoImpl.class);
+		System.out.println("Circle count- "+ simpleJdbcDaoImpl.getCircleCount());
 	}
 
 }
