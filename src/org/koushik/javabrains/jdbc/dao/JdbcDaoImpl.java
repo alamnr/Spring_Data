@@ -26,7 +26,7 @@ public class JdbcDaoImpl {
 	private JdbcTemplate jdbcTemplate ;//= new JdbcTemplate();
 	
 	
-	public Circle getCircle(int circleId)
+	/*public Circle getCircle(int circleId)
 	{
 		Connection conn = null;
 		
@@ -67,7 +67,7 @@ public class JdbcDaoImpl {
 		
 		return circle;
 		
-	}
+	}*/
 	
 	public int getCircleCount(){
 		
@@ -100,6 +100,17 @@ public class JdbcDaoImpl {
 			return circle;
 		}
 		
+	}
+	
+	public void insertCircle(Circle  circle){
+		String sql = "insert into circle (id, name) values(?,?) ";
+		jdbcTemplate.update(sql, new Object[]{circle.getId(),circle.getName()});
+		
+	}
+	
+	public void createTriangletable(){
+		String sql = "create table triangle (id integer, name varchar(50))";
+		jdbcTemplate.execute(sql);
 	}
 
 	public DataSource getDataSource() {
