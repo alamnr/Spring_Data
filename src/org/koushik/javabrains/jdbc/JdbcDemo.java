@@ -22,7 +22,9 @@ public class JdbcDemo {
 		//dao.insertCircle(new Circle(3,"Third Circle"));
 		System.out.println("Size: "+dao.getAllCircles().size());
 		
-		dao.createTriangletable();
+		//dao.createTriangletable();
+		
+		//dao.insertNamedParamCircle(new Circle(4,"Fourth Circle"));
 	}
 
 }
