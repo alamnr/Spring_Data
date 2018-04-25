@@ -6,11 +6,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.sql.DataSource;
+
 import org.koushik.javabrains.jdbc.model.Circle;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
-
+@Component
 public class JdbcDaoImpl {
+	
+	@Autowired
+	private DataSource dataSource;
+	
 	
 	public Circle getCircle(int circleId)
 	{
@@ -18,11 +26,11 @@ public class JdbcDaoImpl {
 		
 		Circle circle = null;
 		
-		String driver = "com.mysql.jdbc.Driver";
+		
 		
 		try {
-			Class.forName(driver).newInstance();
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test");
+			
+			conn = dataSource.getConnection();
 			
 			PreparedStatement ps = conn.prepareStatement("select * from circle where id = ?");
 			ps.setInt(1, circleId);
@@ -37,10 +45,7 @@ public class JdbcDaoImpl {
 			conn.close();
 			
 			
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
+		}  catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -56,6 +61,17 @@ public class JdbcDaoImpl {
 		
 		return circle;
 		
+	}
+	
+
+	public DataSource getDataSource() {
+		return dataSource;
+	}
+
+
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 }
